@@ -1,0 +1,27 @@
+# dependencies
+/node_modules
+/.npm-cache
+/.pnp
+.pnp.*
+
+# builds
+/.next
+/out
+/server/**/bin
+/server/**/obj
+
+# local configuration
+.env
+.env.local
+.env.*.local
+appsettings.Development.json
+
+# tooling
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+npm-debug.log*
+/.mobile-audit
+/.edge-*
+/.chrome-*
+/mobile-baseline-*.png

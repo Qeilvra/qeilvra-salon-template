@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #171411;
+  --paper: #fffdf9;
+  --cream: #fbf6f0;
+  --blush: #eebdb8;
+  --rose: #c97c7a;
+  --gold: #b88a4a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, "Avenir Next", "Segoe UI", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #eebdb8;
+  color: #171411;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease,
+    opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #c97c7a;
+  outline-offset: 3px;
+}
+
+.display-title {
+  font-family: "Iowan Old Style", Baskerville, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.container-shell {
+  width: min(100% - 2rem, 1240px);
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .container-shell {
+    width: min(100% - 4rem, 1240px);
+  }
+}
+
+.luxury-card {
+  border: 1px solid rgba(91, 66, 54, 0.14);
+  background: rgba(255, 253, 249, 0.92);
+  box-shadow: 0 14px 45px rgba(76, 51, 41, 0.08);
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 138, 74, 0.55), transparent);
+}
+
+.editorial-image {
+  overflow: hidden;
+}
+
+.editorial-image img {
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.editorial-image:hover img {
+  transform: scale(1.035);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.admin-grid {
+  background-image: linear-gradient(rgba(23, 20, 17, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 20, 17, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-reveal {
+  animation: reveal-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-reveal-delay {
+  animation: reveal-up 800ms 120ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (max-width: 767.98px) {
+  html {
+    scroll-padding-top: 4rem;
+  }
+
+  body {
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
+  .container-shell {
+    width: min(calc(100% - clamp(2rem, 10vw, 4rem)), 1240px);
+  }
+
+  .display-title {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    line-height: 1.45;
+  }
+
+  main section.py-20 {
+    padding-block: 3.75rem;
+  }
+
+  main section.py-24 {
+    padding-block: 4rem;
+  }
+
+  button,
+  summary {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    min-width: 0;
+    max-width: 100%;
+    font-size: 16px !important;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex: 0 0 auto;
+  }
+
+  .animate-reveal,
+  .animate-reveal-delay {
+    animation-duration: 520ms;
+  }
+}
+
+@media (max-width: 767.98px) and (hover: none) and (pointer: coarse) {
+  .editorial-image:hover img {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
