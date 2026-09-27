@@ -63,7 +63,7 @@ export function OverviewPage() {
         actions={<><AdminButton variant="secondary" onClick={() => toast.success("Daily report exported")}>Export report</AdminButton><AdminButton onClick={() => toast("Quick booking opened", { description: "Booking creation will appear in the appointments workspace." })}><CalendarCheck2 className="h-4 w-4" />New appointment</AdminButton></>}
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <KpiCard label="Today’s revenue" value="$4,860" change="12.8%" note="vs. last Sunday" icon={CircleDollarSign} tone="blush" />
         <KpiCard label="Appointments" value="32" change="5 more" note="than last week" icon={CalendarCheck2} tone="ink" />
         <KpiCard label="New customers" value="8" change="18.4%" note="this month" icon={UsersRound} tone="cream" />

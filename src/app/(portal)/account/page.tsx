@@ -36,7 +36,7 @@ export default function AccountOverviewPage() {
         }
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <MetricCard icon={CalendarDays} label="Next visit" value="Sep 03" helper="11 days away" accent />
         <MetricCard icon={Star} label="Élan points" value="760" helper="240 to your next reward" />
         <MetricCard icon={Heart} label="Saved looks" value="6" helper="Your private edit" />
@@ -84,7 +84,7 @@ export default function AccountOverviewPage() {
 
         <PortalCard className="overflow-hidden bg-ink text-white">
           <div className="relative p-6 sm:p-7">
-            <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-blush-300/15 blur-2xl" />
+            <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-blush-300/15 blur-2xl" />
             <div className="relative">
               <span className="grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.06] text-blush-300"><Star className="h-5 w-5" /></span>
               <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.17em] text-blush-300">Élan rewards</p>

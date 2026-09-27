@@ -25,6 +25,20 @@ export function AccountShell({ children }: { children: React.ReactNode }) {
 
   useEffect(() => setNavOpen(false), [pathname]);
 
+  useEffect(() => {
+    if (!navOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setNavOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [navOpen]);
+
   const activeFor = (href: string) =>
     href === "/account" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
@@ -41,7 +55,7 @@ export function AccountShell({ children }: { children: React.ReactNode }) {
       <aside
         className={cn(
           "fixed inset-y-0 left-0 z-50 flex w-[286px] flex-col border-r border-white/10 bg-ink text-white transition-transform duration-300 lg:translate-x-0",
-          navOpen ? "translate-x-0" : "-translate-x-full",
+          navOpen ? "translate-x-0" : "pointer-events-none -translate-x-full lg:pointer-events-auto",
         )}
       >
         <div className="flex h-24 items-center justify-between border-b border-white/10 px-7">
@@ -49,7 +63,7 @@ export function AccountShell({ children }: { children: React.ReactNode }) {
             <span className="block font-display text-[28px] italic leading-none text-blush-300 group-hover:text-white">Maison Élan</span>
             <span className="mt-1.5 block text-[7px] font-semibold uppercase tracking-[0.42em] text-white/45">Client maison</span>
           </Link>
-          <button onClick={() => setNavOpen(false)} className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-white/65 lg:hidden" aria-label="Close menu">
+          <button onClick={() => setNavOpen(false)} className="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-white/65 lg:hidden" aria-label="Close menu">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -110,7 +124,7 @@ export function AccountShell({ children }: { children: React.ReactNode }) {
         <header className="sticky top-0 z-30 border-b border-ink/10 bg-[#fffdf9]/90 backdrop-blur-xl">
           <div className="flex h-[72px] items-center justify-between gap-3 px-4 sm:px-7 lg:px-10">
             <div className="flex items-center gap-3">
-              <button onClick={() => setNavOpen(true)} className="grid h-10 w-10 place-items-center rounded-full border border-ink/10 bg-white lg:hidden" aria-label="Open account navigation">
+              <button onClick={() => setNavOpen(true)} className="grid h-11 w-11 place-items-center rounded-full border border-ink/10 bg-white lg:hidden" aria-label="Open account navigation">
                 <Menu className="h-[18px] w-[18px]" />
               </button>
               <div className="hidden sm:block">
@@ -127,7 +141,7 @@ export function AccountShell({ children }: { children: React.ReactNode }) {
               <div className="relative">
                 <button
                   onClick={() => { setNotificationsOpen((value) => !value); setProfileOpen(false); }}
-                  className="relative grid h-10 w-10 place-items-center rounded-full border border-ink/10 bg-white hover:bg-blush-50"
+                  className="relative grid h-11 w-11 place-items-center rounded-full border border-ink/10 bg-white hover:bg-blush-50 sm:h-10 sm:w-10"
                   aria-label="Notifications"
                   aria-expanded={notificationsOpen}
                 >
@@ -147,7 +161,7 @@ export function AccountShell({ children }: { children: React.ReactNode }) {
               <div className="relative">
                 <button
                   onClick={() => { setProfileOpen((value) => !value); setNotificationsOpen(false); }}
-                  className="flex h-10 items-center gap-2 rounded-full border border-ink/10 bg-white p-1 pr-2 hover:bg-blush-50"
+                  className="flex h-11 items-center gap-2 rounded-full border border-ink/10 bg-white p-1 pr-2 hover:bg-blush-50 sm:h-10"
                   aria-label="Open profile menu"
                   aria-expanded={profileOpen}
                 >

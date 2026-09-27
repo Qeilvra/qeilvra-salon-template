@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -102,6 +102,10 @@ export function AppointmentsPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [records, setRecords] = useState(appointments);
 
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) setView("list");
+  }, []);
+
   const filtered = records.filter((item) => {
     const matchSearch = `${item.client} ${item.service} ${item.artist} ${item.id}`.toLowerCase().includes(query.toLowerCase());
     return matchSearch && (status === "All" || item.status === status);
@@ -116,7 +120,7 @@ export function AppointmentsPage() {
   return (
     <div className="space-y-6">
       <PageHeader eyebrow="Operations" title="Appointments" description="Run the salon day, manage bookings and spot availability at a glance." actions={<><AdminButton variant="secondary" onClick={() => toast.success("Schedule exported") }><Download className="h-4 w-4" />Export</AdminButton><AdminButton onClick={() => setModalOpen(true)}><Plus className="h-4 w-4" />New appointment</AdminButton></>} />
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <KpiCard label="Today’s bookings" value="32" change="86%" note="capacity" icon={CalendarCheck2} tone="ink" />
         <KpiCard label="Confirmed" value="27" change="84%" note="of bookings" icon={Check} tone="blush" />
         <KpiCard label="Pending" value="3" change="Needs action" trend="neutral" icon={Clock3} tone="gold" />
@@ -140,9 +144,10 @@ export function AppointmentsPage() {
             <div className="mb-4 flex flex-wrap items-center gap-2">
               {(["All", "Confirmed", "Checked in", "Pending", "Completed", "Cancelled"] as const).map((item) => <button key={item} onClick={() => setStatus(item)} className={`min-h-11 rounded-full px-3 py-1.5 text-[10px] font-semibold md:min-h-0 ${status === item ? "bg-ink text-white" : "border border-stone-200 bg-white text-stone-500"}`}>{item}</button>)}
             </div>
-            <TableShell><thead><tr><TableHead>Appointment</TableHead><TableHead>Client</TableHead><TableHead>Service</TableHead><TableHead>Artist</TableHead><TableHead>Payment</TableHead><TableHead>Status</TableHead><TableHead></TableHead></tr></thead><tbody>
+            <div className="space-y-3 md:hidden">{filtered.map((item) => <article key={`mobile-${item.id}`} className="rounded-2xl border border-stone-200 bg-white p-4"><div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate text-sm font-semibold text-ink">{item.client}</p><p className="mt-1 text-[10px] text-stone-400">{item.id} · {item.phone}</p></div><StatusChip label={item.status} tone={statusTone[item.status]} /></div><div className="mt-4 rounded-xl bg-stone-50 p-3"><p className="font-display text-lg text-ink">{item.service}</p><p className="mt-1 text-[10px] text-stone-500">{item.date} · {item.time} · {item.duration}</p><p className="mt-1 text-[10px] text-stone-500">with {item.artist}</p></div><div className="mt-3 flex items-center justify-between"><span className="text-sm font-semibold">{formatCurrency(item.amount)}</span><div className="flex gap-2"><AdminButton variant="secondary" className="px-3">View</AdminButton><IconButton label="Appointment actions"><MoreHorizontal className="h-4 w-4" /></IconButton></div></div></article>)}</div>
+            <div className="hidden md:block"><TableShell><thead><tr><TableHead>Appointment</TableHead><TableHead>Client</TableHead><TableHead>Service</TableHead><TableHead>Artist</TableHead><TableHead>Payment</TableHead><TableHead>Status</TableHead><TableHead></TableHead></tr></thead><tbody>
               {filtered.map((item) => <tr key={item.id} className="group hover:bg-stone-50/60"><TableCell><p className="font-semibold text-ink">{item.date} · {item.time}</p><p className="mt-1 text-[10px] text-stone-400">{item.id}</p></TableCell><TableCell><div className="flex items-center gap-2.5"><Avatar name={item.client} size="sm" /><div><p className="font-semibold text-ink">{item.client}</p><p className="mt-0.5 text-[10px] text-stone-400">{item.phone}</p></div></div></TableCell><TableCell><p className="font-medium text-ink">{item.service}</p><p className="mt-0.5 text-[10px] text-stone-400">{item.duration}</p></TableCell><TableCell>{item.artist}</TableCell><TableCell><p className="font-semibold text-ink">{formatCurrency(item.amount)}</p><span className="text-[10px] text-emerald-600">Deposit paid</span></TableCell><TableCell><StatusChip label={item.status} tone={statusTone[item.status]} /></TableCell><TableCell><IconButton label="Appointment actions"><MoreHorizontal className="h-4 w-4" /></IconButton></TableCell></tr>)}
-            </tbody></TableShell>
+            </tbody></TableShell></div>
           </div>
         )}
       </Panel>

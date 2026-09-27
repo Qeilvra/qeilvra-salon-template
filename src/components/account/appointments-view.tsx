@@ -67,7 +67,7 @@ function AppointmentCard({ appointment }: { appointment: PortalAppointment }) {
   return (
     <PortalCard className="overflow-hidden">
       <div className="grid md:grid-cols-[150px_1fr]">
-        <div className="relative min-h-[180px] overflow-hidden md:min-h-full">
+        <div className="relative min-h-[132px] overflow-hidden md:min-h-full">
           <Image src={appointment.image} alt={appointment.service} fill className={cn("object-cover", appointment.status === "cancelled" && "grayscale opacity-70")} sizes="(max-width: 768px) 100vw, 150px" />
           <div className="absolute left-4 top-4 rounded-2xl bg-white/95 px-3 py-2 text-center shadow-sm">
             <span className="block font-display text-2xl leading-none">{appointment.day}</span>
@@ -91,8 +91,8 @@ function AppointmentCard({ appointment }: { appointment: PortalAppointment }) {
           <div className="mt-5 flex flex-wrap items-center gap-3">
             {appointment.status === "upcoming" ? (
               <>
-                <Link href={`/account/appointments/manage?id=${appointment.id}`} className="inline-flex min-h-10 items-center gap-2 rounded-full bg-ink px-5 text-[10px] font-bold uppercase tracking-[0.12em] text-white hover:bg-black">Manage appointment <ChevronRight className="h-3.5 w-3.5" /></Link>
-                <button onClick={() => toast.success("Added to your calendar", { description: `${appointment.date} at ${appointment.time}` })} className="inline-flex min-h-10 items-center rounded-full border border-ink/15 px-5 text-[10px] font-bold uppercase tracking-[0.12em] hover:border-ink">Add to calendar</button>
+                <Link href={`/account/appointments/manage?id=${appointment.id}`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-[10px] font-bold uppercase tracking-[0.12em] text-white hover:bg-black">Manage appointment <ChevronRight className="h-3.5 w-3.5" /></Link>
+                <button onClick={() => toast.success("Added to your calendar", { description: `${appointment.date} at ${appointment.time}` })} className="inline-flex min-h-11 items-center rounded-full border border-ink/15 px-5 text-[10px] font-bold uppercase tracking-[0.12em] hover:border-ink">Add to calendar</button>
               </>
             ) : appointment.status === "completed" ? (
               <>

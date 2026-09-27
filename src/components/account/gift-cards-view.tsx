@@ -76,10 +76,10 @@ export function GiftCardsView() {
       </PortalCard>
 
       {addOpen ? (
-        <div className="fixed inset-0 z-[70] grid place-items-center bg-ink/60 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="add-gift-card-title">
+        <div className="fixed inset-0 z-[70] flex items-end justify-center bg-ink/60 p-0 pt-[env(safe-area-inset-top)] backdrop-blur-sm sm:grid sm:place-items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="add-gift-card-title">
           <button className="absolute inset-0" onClick={() => setAddOpen(false)} aria-label="Close" />
-          <form onSubmit={addCard} className="relative z-10 w-full max-w-md rounded-[28px] bg-white p-6 shadow-2xl sm:p-8">
-            <button type="button" onClick={() => setAddOpen(false)} className="ml-auto grid h-9 w-9 place-items-center rounded-full border border-ink/10" aria-label="Close"><X className="h-4 w-4" /></button>
+          <form onSubmit={addCard} className="relative z-10 max-h-[calc(100dvh-env(safe-area-inset-top))] w-full max-w-md overflow-y-auto rounded-t-[28px] bg-white p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] shadow-2xl sm:rounded-[28px] sm:p-8">
+            <button type="button" onClick={() => setAddOpen(false)} className="ml-auto grid h-11 w-11 place-items-center rounded-full border border-ink/10" aria-label="Close"><X className="h-4 w-4" /></button>
             <span className="mt-2 grid h-12 w-12 place-items-center rounded-full bg-blush-100 text-rose-500"><Gift className="h-5 w-5" /></span><p className="eyebrow mt-5 text-rose-500">Redeem a gift</p><h2 id="add-gift-card-title" className="mt-2 font-display text-3xl">Add a gift card</h2><p className="mt-3 text-xs leading-5 text-ink/45">Find the code in your gift email or on the back of a physical card.</p>
             <label className="mt-6 block text-[11px] font-semibold">Gift card code<input autoFocus value={code} onChange={(event) => setCode(event.target.value)} placeholder="GC-ÉLAN-XXXX" className={`${fieldClass} mt-2 font-mono uppercase tracking-wider`} /></label>
             <button className="mt-5 min-h-12 w-full rounded-full bg-ink px-5 text-[10px] font-bold uppercase tracking-[0.12em] text-white">Add to account</button>

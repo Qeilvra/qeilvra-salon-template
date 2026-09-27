@@ -114,10 +114,16 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-1 sm:gap-2">
+            <Link
+              href="/book"
+              className="inline-flex min-h-11 items-center rounded-full bg-blush-300 px-3.5 text-[9px] font-bold uppercase tracking-[0.12em] text-ink shadow-sm hover:bg-blush-400 md:hidden"
+            >
+              Book
+            </Link>
             <Link href="/account" aria-label="My account" className="hidden h-10 w-10 items-center justify-center rounded-full hover:bg-blush-100 sm:flex">
               <UserRound className="h-[18px] w-[18px]" />
             </Link>
-            <Link href="/cart" aria-label={`Shopping bag with ${count} items`} className="relative flex h-11 w-11 items-center justify-center rounded-full hover:bg-blush-100 md:h-10 md:w-10">
+            <Link href="/cart" aria-label={`Shopping bag with ${count} items`} className="relative flex h-11 w-11 items-center justify-center rounded-full hover:bg-blush-100 max-[339px]:hidden md:h-10 md:w-10">
               <ShoppingBag className="h-[18px] w-[18px]" />
               {count > 0 ? <span className="absolute right-0 top-0 grid h-5 min-w-5 place-items-center rounded-full bg-blush-400 px-1 text-[9px] font-bold text-ink">{count}</span> : null}
             </Link>

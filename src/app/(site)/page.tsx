@@ -59,20 +59,21 @@ export default function HomePage() {
               <ButtonLink href="/services" size="lg" variant="light" className="w-full border-white/25 bg-white/5 text-white backdrop-blur hover:text-ink min-[480px]:w-auto">Explore services <Play className="h-3.5 w-3.5 fill-current" /></ButtonLink>
             </div>
           </div>
-          <div className="mt-8 max-w-3xl animate-reveal-delay md:mt-12 lg:mt-16">
+          <div className="mt-8 hidden max-w-3xl animate-reveal-delay md:mt-12 md:block lg:mt-16">
             <QuickBook />
           </div>
-          <div className="mt-7 grid max-w-3xl grid-cols-3 divide-x divide-white/15 border-t border-white/15 pt-5 md:mt-10 md:pt-7">
+          <div className="mt-8 grid max-w-3xl grid-cols-2 gap-x-4 gap-y-5 border-t border-white/15 pt-5 md:mt-10 md:grid-cols-4 md:gap-0 md:divide-x md:divide-white/15 md:pt-7">
             {[
               [ShieldCheck, "Safe & serene", "Hospital-grade care"],
               [Award, "Expert artists", "Master-level detail"],
+              [Sparkles, "Premium products", "Artist-approved formulas"],
               [Leaf, "Conscious rituals", "Vegan, considered care"],
             ].map(([Icon, title, text]) => {
               const IconComponent = Icon as typeof ShieldCheck;
               return (
-                <div key={title as string} className="flex flex-col gap-2 px-3 first:pl-0 sm:flex-row sm:items-center sm:gap-3 sm:px-6">
+                <div key={title as string} className="flex items-center gap-3 md:px-5 md:first:pl-0">
                   <IconComponent className="h-5 w-5 shrink-0 text-blush-300" />
-                  <div><p className="text-[10px] font-semibold sm:text-xs">{title as string}</p><p className="mt-1 hidden text-[9px] text-white/45 sm:block">{text as string}</p></div>
+                  <div><p className="text-[10px] font-semibold md:text-xs">{title as string}</p><p className="mt-1 text-[9px] leading-4 text-white/45">{text as string}</p></div>
                 </div>
               );
             })}
@@ -155,7 +156,7 @@ export default function HomePage() {
             <SectionHeading eyebrow="The artists" title="Meet your nail confidantes" description="Known for their craft. Loved for the way they make you feel." align="left" />
             <ButtonLink href="/team" variant="ghost" size="sm">Meet the team <ArrowRight className="h-4 w-4" /></ButtonLink>
           </div>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2 md:mt-12 lg:grid-cols-4">{artists.map((artist) => <ArtistCard key={artist.slug} artist={artist} />)}</div>
+          <div className="no-scrollbar -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 md:mt-12 lg:grid-cols-4">{artists.map((artist) => <div key={artist.slug} className="w-[78vw] max-w-[300px] shrink-0 snap-start sm:w-auto sm:max-w-none"><ArtistCard artist={artist} /></div>)}</div>
         </div>
       </section>
 
@@ -181,9 +182,9 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-ink/85" />
         <div className="container-shell relative z-10">
           <SectionHeading eyebrow="Client notes" title="Kind words, beautifully kept" light />
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          <div className="no-scrollbar -mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0">
             {reviews.map((review) => (
-              <blockquote key={review.name} className="rounded-[1.5rem] border border-white/12 bg-white/[0.055] p-7 backdrop-blur">
+              <blockquote key={review.name} className="w-[82vw] max-w-[340px] shrink-0 snap-start rounded-[1.5rem] border border-white/12 bg-white/[0.055] p-6 backdrop-blur lg:w-auto lg:max-w-none lg:p-7">
                 <div className="flex gap-1">{Array.from({ length: review.rating }).map((_, index) => <Star key={index} className="h-3.5 w-3.5 fill-blush-300 text-blush-300" />)}</div>
                 <p className="mt-6 font-display text-2xl italic leading-9 text-white/90">“{review.text}”</p>
                 <footer className="mt-7 border-t border-white/10 pt-5"><span className="text-xs font-semibold">{review.name}</span><span className="ml-2 text-[10px] uppercase tracking-wider text-white/35">{review.service}</span></footer>
@@ -196,11 +197,11 @@ export default function HomePage() {
 
       <section className="py-14 md:py-28">
         <div className="container-shell grid gap-5 lg:grid-cols-2">
-          <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] bg-blush-200 p-7 md:min-h-[460px] md:p-12">
+          <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] bg-blush-200 p-7 md:min-h-[460px] md:p-12">
             <div className="relative z-10 max-w-sm"><p className="eyebrow text-rose-500">Élan Society</p><h2 className="display-title mt-5 text-[clamp(2.35rem,10.5vw,3rem)] md:text-5xl">Your ritual, with a little more.</h2><p className="mt-5 text-sm leading-7 text-ink/60">Monthly care, priority booking, member pricing and thoughtful surprises—designed around consistency.</p><div className="mt-8"><ButtonLink href="/membership" variant="secondary" className="max-[479px]:w-full">Explore membership <ArrowRight className="h-4 w-4" /></ButtonLink></div></div>
-            <div className="absolute -bottom-16 -right-12 h-72 w-72 rounded-full border-[45px] border-white/30" /><HeartHandshake className="absolute bottom-10 right-10 h-24 w-24 stroke-[.65] text-rose-500/50" />
+            <div className="pointer-events-none absolute -bottom-16 -right-12 h-72 w-72 rounded-full border-[45px] border-white/30" /><HeartHandshake className="pointer-events-none absolute bottom-10 right-10 h-24 w-24 stroke-[.65] text-rose-500/50" />
           </div>
-          <div className="relative min-h-[430px] overflow-hidden rounded-[2rem] bg-ink p-7 text-white md:min-h-[460px] md:p-12">
+          <div className="relative min-h-[360px] overflow-hidden rounded-[2rem] bg-ink p-7 text-white md:min-h-[460px] md:p-12">
             <Image src="/images/spa-flatlay.png" alt="Maison Élan gift" fill className="object-cover opacity-30" /><div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-transparent" />
             <div className="relative z-10 max-w-sm"><p className="eyebrow text-blush-300">Gift cards</p><h2 className="display-title mt-5 text-[clamp(2.35rem,10.5vw,3rem)] md:text-5xl">Give them time to feel beautiful.</h2><p className="mt-5 text-sm leading-7 text-white/60">Instant digital delivery, a personal note and the freedom to choose their perfect ritual.</p><div className="mt-8"><ButtonLink href="/gift-cards" variant="light" className="max-[479px]:w-full">Send a gift <Gift className="h-4 w-4" /></ButtonLink></div></div>
           </div>

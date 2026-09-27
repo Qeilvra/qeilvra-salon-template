@@ -86,12 +86,12 @@ export function WishlistView() {
       </PortalCard>
 
       {selected ? (
-        <div className="fixed inset-0 z-[70] grid place-items-center bg-ink/70 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={selected.name}>
+        <div className="fixed inset-0 z-[70] flex items-end justify-center bg-ink/70 p-0 pt-[env(safe-area-inset-top)] backdrop-blur-sm md:grid md:place-items-center md:p-4" role="dialog" aria-modal="true" aria-label={selected.name}>
           <button className="absolute inset-0" onClick={() => setSelected(null)} aria-label="Close preview" />
-          <div className="relative z-10 w-full max-w-3xl overflow-hidden rounded-[28px] bg-white shadow-2xl md:grid md:grid-cols-[1.1fr_.9fr]">
-            <div className="relative min-h-[330px] md:min-h-[520px]"><Image src={selected.image} alt={selected.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 55vw" /></div>
+          <div className="relative z-10 max-h-[calc(100dvh-env(safe-area-inset-top))] w-full max-w-3xl overflow-y-auto rounded-t-[28px] bg-white pb-[env(safe-area-inset-bottom)] shadow-2xl md:grid md:grid-cols-[1.1fr_.9fr] md:overflow-hidden md:rounded-[28px] md:pb-0">
+            <div className="relative min-h-[280px] md:min-h-[520px]"><Image src={selected.image} alt={selected.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 55vw" /></div>
             <div className="flex flex-col p-6 sm:p-8">
-              <button onClick={() => setSelected(null)} className="ml-auto grid h-9 w-9 place-items-center rounded-full border border-ink/10" aria-label="Close"><X className="h-4 w-4" /></button>
+              <button onClick={() => setSelected(null)} className="ml-auto grid h-11 w-11 place-items-center rounded-full border border-ink/10" aria-label="Close"><X className="h-4 w-4" /></button>
               <p className="eyebrow mt-8 text-rose-500">{selected.style}</p><h2 className="mt-3 font-display text-4xl">{selected.name}</h2><p className="mt-4 text-sm leading-6 text-ink/50">Bring this reference to your appointment and your artist will tailor the color, shape, and details to you.</p>
               <div className="mt-auto pt-8"><Link href="/book" onClick={() => toast.success("Look attached to booking")} className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-ink px-5 text-[10px] font-bold uppercase tracking-[0.12em] text-white"><CalendarPlus className="h-4 w-4 text-blush-300" /> Book this look</Link><button onClick={() => removeLook(selected.id)} className="mt-3 inline-flex min-h-10 w-full items-center justify-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] text-ink/40 hover:text-red-600"><Trash2 className="h-3.5 w-3.5" /> Remove from saved</button></div>
             </div>

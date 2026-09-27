@@ -49,14 +49,14 @@ export function MetricCard({
   accent?: boolean;
 }) {
   return (
-    <PortalCard className={cn("relative overflow-hidden p-5", accent && "border-blush-300/60 bg-blush-100/65")}>
+    <PortalCard className={cn("relative overflow-hidden p-4 sm:p-5", accent && "border-blush-300/60 bg-blush-100/65")}>
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-ink/45">{label}</p>
-          <p className="mt-3 font-display text-3xl text-ink">{value}</p>
-          <p className="mt-1 text-xs text-ink/50">{helper}</p>
+          <p className="mt-2 font-display text-2xl text-ink sm:mt-3 sm:text-3xl">{value}</p>
+          <p className="mt-1 text-[10px] leading-4 text-ink/50 sm:text-xs">{helper}</p>
         </div>
-        <span className={cn("grid h-11 w-11 place-items-center rounded-full bg-cream text-gold", accent && "bg-white/80 text-rose-500")}>
+        <span className={cn("grid h-9 w-9 shrink-0 place-items-center rounded-full bg-cream text-gold sm:h-11 sm:w-11", accent && "bg-white/80 text-rose-500")}>
           <Icon className="h-[18px] w-[18px]" />
         </span>
       </div>

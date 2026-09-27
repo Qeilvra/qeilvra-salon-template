@@ -8,7 +8,7 @@ type Artist = (typeof artists)[number];
 export function ArtistCard({ artist }: { artist: Artist }) {
   return (
     <article className="group">
-      <Link href={`/team/${artist.slug}`} className="editorial-image relative block aspect-[4/5] overflow-hidden rounded-t-[10rem] rounded-b-[1.5rem] bg-blush-100">
+      <Link href={`/team/${artist.slug}`} className="editorial-image relative block aspect-square overflow-hidden rounded-t-[10rem] rounded-b-[1.5rem] bg-blush-100 sm:aspect-[4/5]">
         <Image src={artist.image} alt={artist.name} fill sizes="(max-width: 768px) 90vw, 300px" className="object-cover grayscale-[12%]" />
         <span className="absolute bottom-4 right-4 grid h-11 w-11 place-items-center rounded-full bg-white text-ink shadow-soft transition-transform group-hover:rotate-45"><ArrowUpRight className="h-4 w-4" /></span>
       </Link>

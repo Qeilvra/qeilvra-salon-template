@@ -11,12 +11,26 @@ const browserPath = process.env.MOBILE_AUDIT_BROWSER ??
   "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
 const quick = process.argv.includes("--quick");
 const captureScreenshots = !process.argv.includes("--no-screenshots");
-const widths = [320, 360, 375, 390, 412, 430];
+const widths = [320, 360, 375, 390, 414, 430, 768];
 
 const coreRoutes = [
   "/",
   "/services",
   "/services/signature-manicure",
+  "/about",
+  "/pricing",
+  "/reviews",
+  "/membership",
+  "/offers",
+  "/gift-cards",
+  "/faq",
+  "/contact",
+  "/careers",
+  "/group-bookings",
+  "/policies/privacy",
+  "/policies/terms",
+  "/policies/cancellation",
+  "/policies/refunds",
   "/book/service",
   "/book/add-ons",
   "/book/technician",
@@ -35,6 +49,11 @@ const coreRoutes = [
   "/auth/register",
   "/account",
   "/account/appointments",
+  "/account/appointments/manage?id=ME-2418",
+  "/account/wishlist",
+  "/account/rewards",
+  "/account/orders",
+  "/account/gift-cards",
   "/account/profile",
   "/contact",
   "/faq",
@@ -42,6 +61,18 @@ const coreRoutes = [
   "/blog/quiet-luxury-nails",
   "/admin",
   "/admin/appointments",
+  "/admin/customers",
+  "/admin/services",
+  "/admin/categories",
+  "/admin/staff",
+  "/admin/products",
+  "/admin/reviews",
+  "/admin/blog",
+  "/admin/promotions",
+  "/admin/memberships",
+  "/admin/gift-cards",
+  "/admin/reports",
+  "/admin/settings",
 ];
 
 const routes = quick
@@ -54,6 +85,7 @@ const screenshotRoutes = new Set([
   "/book/details",
   "/gallery",
   "/shop",
+  "/cart",
   "/checkout",
   "/account",
   "/admin",
@@ -135,7 +167,7 @@ const auditExpression = String.raw`(() => {
   const visible = (element) => {
     const style = getComputedStyle(element);
     const rect = element.getBoundingClientRect();
-    return style.display !== "none" && style.visibility !== "hidden" && rect.width > 0 && rect.height > 0;
+    return style.display !== "none" && style.visibility !== "hidden" && style.pointerEvents !== "none" && !element.closest('[aria-hidden="true"], [inert]') && rect.width > 0 && rect.height > 0;
   };
   const selector = (element) => {
     const pieces = [];

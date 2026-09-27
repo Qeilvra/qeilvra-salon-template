@@ -114,17 +114,17 @@ export function KpiCard({
   };
   const TrendIcon = trend === "down" ? ArrowDownRight : ArrowUpRight;
   return (
-    <article className="rounded-2xl border border-stone-200/80 bg-white p-5 shadow-[0_8px_30px_rgba(42,32,26,0.04)]">
+    <article className="admin-kpi-card min-w-0 rounded-2xl border border-stone-200/80 bg-white p-4 shadow-[0_8px_30px_rgba(42,32,26,0.04)] sm:p-5">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-xs font-medium text-stone-500">{label}</p>
-          <p className="mt-2 text-2xl font-semibold tracking-tight text-ink">{value}</p>
+          <p className="mt-2 break-words text-xl font-semibold tracking-tight text-ink sm:text-2xl">{value}</p>
         </div>
-        <span className={cn("grid h-10 w-10 place-items-center rounded-xl", tones[tone])}>
+        <span className={cn("grid h-9 w-9 shrink-0 place-items-center rounded-xl sm:h-10 sm:w-10", tones[tone])}>
           <Icon className="h-[18px] w-[18px]" />
         </span>
       </div>
-      <div className="mt-4 flex min-h-5 items-center gap-2 text-[11px]">
+      <div className="mt-3 flex min-h-5 flex-wrap items-center gap-x-2 gap-y-1 text-[10px] sm:mt-4 sm:text-[11px]">
         {change ? (
           <span className={cn("inline-flex items-center gap-0.5 font-semibold", trend === "down" ? "text-rose-600" : trend === "neutral" ? "text-stone-500" : "text-emerald-600")}>
             {trend !== "neutral" ? <TrendIcon className="h-3.5 w-3.5" /> : null}
@@ -246,7 +246,7 @@ export function Avatar({ name, image, size = "md" }: { name: string; image?: str
 }
 
 export function TableShell({ children }: { children: ReactNode }) {
-  return <div className="-mx-5 max-w-[calc(100%+2.5rem)] overflow-x-auto px-5 pb-1"><table className="w-full min-w-[720px] border-separate border-spacing-0 text-left max-md:w-[720px] max-md:table-fixed">{children}</table></div>;
+  return <div role="region" aria-label="Scrollable data table" tabIndex={0} className="-mx-5 max-w-[calc(100%+2.5rem)] overflow-x-auto overscroll-x-contain px-5 pb-2 outline-none focus-visible:ring-2 focus-visible:ring-blush-400"><table className="w-full min-w-[720px] border-separate border-spacing-0 text-left max-md:w-[720px] max-md:table-fixed">{children}</table></div>;
 }
 
 export function TableHead({ children }: { children?: ReactNode }) {
